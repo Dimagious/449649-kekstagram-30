@@ -1,53 +1,39 @@
-function checkStringLength(str, maxLength) {
+function isStringFitsLength(str, maxLength) {
   return str?.length <= maxLength;
 }
 
-checkStringLength('', 0);
-checkStringLength('abc', 5);
-checkStringLength('12345', 5);
-checkStringLength('abcdef', 3);
-checkStringLength(null, 6);
-checkStringLength(NaN, 100);
-checkStringLength(undefined, 2);
+isStringFitsLength('', 0);
+isStringFitsLength('abc', 5);
+isStringFitsLength('12345', 5);
+isStringFitsLength('abcdef', 3);
+isStringFitsLength(null, 6);
+isStringFitsLength(NaN, 100);
+isStringFitsLength(undefined, 2);
 
-function isPalindrome(str) {
-  const normalizedStr = str.replace(/\s/g, '').toLowerCase();
-  let reversedStr = '';
-
-  for (let i = normalizedStr.length - 1; i >= 0; i--) {
-    reversedStr += normalizedStr.charAt(i);
-  }
-
-  return normalizedStr === reversedStr;
+function isPalindrome(input) {
+  const normalizedInput = String(input).replace(/\s/g, '').toLowerCase();
+  const reversedInput = normalizedInput.split('').reverse().join('');
+  return normalizedInput === reversedInput;
 }
 
 isPalindrome('топот');
 isPalindrome('ДовОд');
 isPalindrome('Кекс');
 isPalindrome('Лёша на полке клопа нашёл ');
+isPalindrome(12321);
 
-function extractNumbers(input) {
-  const inputStr = input.toString();
-  let numbersStr = '';
 
-  for (let i = 0; i < inputStr.length; i++) {
-    if (!isNaN(parseInt(inputStr[i], 10))) {
-      numbersStr += inputStr[i];
-    }
-  }
-
-  if (numbersStr.length > 0) {
-    return parseInt(numbersStr, 10);
-  } else {
-    return NaN;
-  }
+function parseDigits(input) {
+  const inputAsString = String(input);
+  const digitsOnly = inputAsString.replace(/\D/g, '');
+  return digitsOnly.length > 0 ? Number(digitsOnly) : NaN;
 }
 
-extractNumbers('2023 год');
-extractNumbers('ECMAScript 2022');
-extractNumbers('1 кефир, 0.5 батона');
-extractNumbers('агент 007');
-extractNumbers('а я томат');
-extractNumbers(2023);
-extractNumbers(-1);
-extractNumbers(1.5);
+parseDigits('2023 год');
+parseDigits('ECMAScript 2022');
+parseDigits('1 кефир, 0.5 батона');
+parseDigits('агент 007');
+parseDigits('а я томат');
+parseDigits(2023);
+parseDigits(-1);
+parseDigits(1.5);
