@@ -20,18 +20,17 @@ const getRandomItem = (items) => items[getRandomInteger(0, items.length - 1)];
 
 const getRandomMessage = (messages) => {
   const numberOfMessages = getRandomInteger(1, 2);
-  const messageArray = [];
+  const messageSet = new Set();
 
-  Array(numberOfMessages)
-    .fill()
-    .forEach(() => {
-      messageArray.push(getRandomItem(messages));
-    });
+  while (messageSet.size < numberOfMessages) {
+    messageSet.add(getRandomItem(messages));
+  }
 
-  return messageArray.join(' ');
+  return [...messageSet].join(' ');
 };
 
-const buildComment = (itemCount) =>
+
+const buildCommentsData = (itemCount) =>
   new Array(itemCount).fill(1).map((start, index) => ({
     id: start + index,
     avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
@@ -45,7 +44,8 @@ const buildPostsData = (itemCount) =>
     url: `photos/${start + index}.jpg`,
     description: getRandomItem(DESCRIPTIONS),
     likes: getRandomInteger(15, 200),
-    comments: buildComment(getRandomInteger(0, 30)),
+    comments: buildCommentsData(getRandomInteger(0, 30)),
   }));
 
 void buildPostsData;
+console.log(buildPostsData(25));
