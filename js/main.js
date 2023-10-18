@@ -48,4 +48,4 @@ const buildPostsData = (itemCount) =>
   }));
 
 void buildPostsData;
-console.log(buildPostsData(25));
+
