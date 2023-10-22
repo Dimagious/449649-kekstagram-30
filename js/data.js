@@ -1,4 +1,4 @@
-import {getRandomInteger, getRandomItem, getRandomMessage} from './utilities.js';
+import { getRandomInteger, getRandomItem, getRandomMessage } from './utilities.js';
 
 const USERNAMES = ['Юля', 'Дима', 'Данил', 'Максим'];
 const MESSAGES = [
@@ -34,4 +34,4 @@ const buildPostsData = (itemCount) =>
     comments: buildCommentsData(getRandomInteger(0, 30)),
   }));
 
-  export {buildPostsData};
+export { buildPostsData };

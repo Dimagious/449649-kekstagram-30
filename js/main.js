@@ -1,2 +1,2 @@
-import {buildPostsData} from "./data.js";
+import {buildPostsData} from './data.js';
 void buildPostsData;
