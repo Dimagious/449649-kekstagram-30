@@ -1,2 +1,3 @@
 import {buildPostsData} from './data.js';
-void buildPostsData;
+import {renderThumbnails} from './thumbnails.js';
+renderThumbnails(buildPostsData());
