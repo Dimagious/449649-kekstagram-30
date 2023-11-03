@@ -7,7 +7,7 @@ const closeButton = document.querySelector('.big-picture__cancel');
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closePopup();
+    closeButton.click();
   }
 };
 
@@ -29,10 +29,10 @@ closeButton.addEventListener('click', () => {
 
 const renderPopupDetails = (properties) => {
   const {url, description, likes, comments} = properties;
-  openPopup();
   bigPicture.querySelector('img').src = url;
   bigPicture.querySelector('.likes-count').textContent = likes;
   bigPicture.querySelector('.social__caption').textContent = description;
+  openPopup();
   renderComments(comments);
 };
 
