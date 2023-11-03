@@ -1,6 +1,6 @@
+const COMMENTS_TO_SHOW = 5;
 const container = document.querySelector('.social__comments');
 const template = document.querySelector('.social__comment');
-const socialCommentCount = document.querySelector('.social__comment-count');
 const commentsTotal = document.querySelector('.social__comment-total-count');
 const commentsShown = document.querySelector('.social__comment-shown-count');
 const commentsLoaderButton = document.querySelector('.comments-loader');
@@ -15,14 +15,19 @@ const createComments = (comments) => comments.map((properties) => {
   return comment;
 });
 
+const data = [];
+const onCommentsLoaderButtonClick = () => {
+  container.append(...createComments(data.splice(0, COMMENTS_TO_SHOW)));
+  commentsShown.textContent = container.childElementCount;
+  commentsLoaderButton.classList.toggle('hidden', !data.length);
+};
+
 const renderComments = (comments) => {
-  container.querySelectorAll('.social__comment').forEach((comment) => comment.remove());
-  container.append(...createComments(comments));
+  data.splice(0, data.length, ...comments);
+  container.replaceChildren();
   commentsTotal.textContent = comments.length;
-  commentsShown.textContent = comments.length <= 5 ? comments.length : '5';
-  // временно скрываем блоки с количеством комментариев и кнопкой загрузки комментариев
-  socialCommentCount.classList.add('hidden');
-  commentsLoaderButton.classList.add('hidden');
+  commentsLoaderButton.addEventListener('click', onCommentsLoaderButtonClick);
+  commentsLoaderButton.click();
 };
 
 export {renderComments};

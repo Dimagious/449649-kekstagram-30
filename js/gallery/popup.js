@@ -11,17 +11,17 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
-function openPopup() {
+const openPopup = () => {
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
-}
+};
 
-function closePopup() {
+const closePopup = () => {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
-}
+};
 
 closeButton.addEventListener('click', () => {
   closePopup();
