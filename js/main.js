@@ -1,3 +1,4 @@
-import {buildPostsData} from './data.js';
-import {renderThumbnails} from './thumbnails.js';
-renderThumbnails(buildPostsData());
+import { buildPostsData } from './data.js';
+import {renderGallery} from './gallery/gallery.js';
+
+renderGallery(buildPostsData(19));
