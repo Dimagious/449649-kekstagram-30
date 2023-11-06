@@ -1,3 +1,5 @@
+import '../../vendor/pristine/pristine.min.js';
+
 const REG_EXP_FOR_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_COMMENT_LENGTH = 140;
 const MAX_HASHTAGS = 5;
@@ -6,15 +8,15 @@ const ERROR_TOO_MANY_HASHTAGS = 'Превышено количество хэш-
 const ERROR_DUPLICATE_HASHTAGS = 'Хэш-теги не должны повторяться';
 const ERROR_TOO_MANY_SYMBOLS = `Длина комментария больше ${MAX_COMMENT_LENGTH} символов`;
 
-const uploadForm = document.querySelector('.img-upload__form');
-const hashtagInput = uploadForm.querySelector('.text__hashtags');
-const commentInput = uploadForm.querySelector('.text__description');
+const form = document.querySelector('.img-upload__form');
+const hashtagInput = form.querySelector('.text__hashtags');
+const commentInput = form.querySelector('.text__description');
 
 const escapeClickHandler = (evt) => evt.stopPropagation();
 hashtagInput.addEventListener('keydown', escapeClickHandler);
 commentInput.addEventListener('keydown', escapeClickHandler);
 
-const pristine = new Pristine(uploadForm, {
+const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__field-wrapper--error',
