@@ -6,7 +6,7 @@ const closeButton = form.querySelector('.img-upload__cancel');
 
 const onDocumentKeydown = (event) => {
   if (isEscapeKey(event) && !event.target.type?.startsWith('text')) {
-    evt.preventDefault();
+    event.preventDefault();
     closeButton.click();
   }
 };
