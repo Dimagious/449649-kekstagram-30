@@ -34,7 +34,7 @@ const validateComment = (value) => value.length < MAX_COMMENT_LENGTH;
 pristine.addValidator(hashtagInput, validateHashTags, ERROR_INVALID_HASHTAG, 1, true);
 pristine.addValidator(hashtagInput, isValidHashtagLength, ERROR_TOO_MANY_HASHTAGS, 2, true);
 pristine.addValidator(hashtagInput, hasNoDuplicates, ERROR_DUPLICATE_HASHTAGS, 3, true);
-pristine.addValidator(commentInput, validateComment, ERROR_TOO_MANY_SYMBOLS, 1, true);
+pristine.addValidator(commentInput, validateComment, ERROR_TOO_MANY_SYMBOLS);
 
 const validateForm = () => {
   pristine.validate();
