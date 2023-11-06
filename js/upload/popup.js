@@ -4,8 +4,8 @@ const form = document.querySelector('.img-upload__form');
 const popup = form.querySelector('.img-upload__overlay');
 const closeButton = form.querySelector('.img-upload__cancel');
 
-const onUploadButtonClick = (evt) => {
-  if (isEscapeKey(evt)) {
+const onDocumentKeydown = (event) => {
+  if (isEscapeKey(event) && !event.target.type?.startsWith('text')) {
     evt.preventDefault();
     closeButton.click();
   }
@@ -14,14 +14,14 @@ const onUploadButtonClick = (evt) => {
 const closePopup = () => {
   popup.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onUploadButtonClick);
+  document.removeEventListener('keydown', onDocumentKeydown);
 };
 
 const openPopup = () => {
   popup.classList.remove('hidden');
   document.body.classList.add('modal-open');
   closeButton.addEventListener('click', closePopup);
-  document.addEventListener('keydown', onUploadButtonClick);
+  document.addEventListener('keydown', onDocumentKeydown);
 };
 
 export {openPopup};

@@ -12,10 +12,6 @@ const form = document.querySelector('.img-upload__form');
 const hashtagInput = form.querySelector('.text__hashtags');
 const commentInput = form.querySelector('.text__description');
 
-const escapeClickHandler = (evt) => evt.stopPropagation();
-hashtagInput.addEventListener('keydown', escapeClickHandler);
-commentInput.addEventListener('keydown', escapeClickHandler);
-
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
