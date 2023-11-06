@@ -1,4 +1,4 @@
-const REG_EXP_FOR_HASHTAG = new RegExp('/^#[a-zа-яё0-9]{1,19}$/i');
+const REG_EXP_FOR_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_COMMENT_LENGTH = 140;
 const MAX_HASHTAGS = 5;
 const ERROR_INVALID_HASHTAG = 'Введён невалидный хэш-тег';
@@ -10,9 +10,9 @@ const uploadForm = document.querySelector('.img-upload__form');
 const hashtagInput = uploadForm.querySelector('.text__hashtags');
 const commentInput = uploadForm.querySelector('.text__description');
 
-const resetCloseByEscape = (evt) => evt.stopPropagation();
-hashtagInput.addEventListener('keydown', resetCloseByEscape);
-commentInput.addEventListener('keydown', resetCloseByEscape);
+const escapeClickHandler = (evt) => evt.stopPropagation();
+hashtagInput.addEventListener('keydown', escapeClickHandler);
+commentInput.addEventListener('keydown', escapeClickHandler);
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -20,13 +20,11 @@ const pristine = new Pristine(uploadForm, {
   errorTextClass: 'img-upload__field-wrapper--error',
 });
 
-const validateHashTags = (value) => {
-  const hashTagsToValidate = value.toLowerCase().trim().split(/\s+/);
-  return hashTagsToValidate.find((item) => !REG_EXP_FOR_HASHTAG.test(item));
-};
-const isValidHashtagLength = (value) => value.toLowerCase().trim().split(/\s+/).length <= MAX_HASHTAGS;
+const parseHashtags = (value) => value.toLowerCase().trim().split(/\s+/);
+const validateHashTags = (value) => parseHashtags(value).every((hashtag) => REG_EXP_FOR_HASHTAG.test(hashtag));
+const isValidHashtagLength = (value) => parseHashtags(value).length <= MAX_HASHTAGS;
 const hasNoDuplicates = (value) => {
-  const hashTagsToValidate = value.toLowerCase().trim().split(/\s+/);
+  const hashTagsToValidate = parseHashtags(value);
   return new Set(hashTagsToValidate).size === hashTagsToValidate.length;
 };
 const validateComment = (value) => value.length < MAX_COMMENT_LENGTH;
@@ -36,4 +34,12 @@ pristine.addValidator(hashtagInput, isValidHashtagLength, ERROR_TOO_MANY_HASHTAG
 pristine.addValidator(hashtagInput, hasNoDuplicates, ERROR_DUPLICATE_HASHTAGS, 3, true);
 pristine.addValidator(commentInput, validateComment, ERROR_TOO_MANY_SYMBOLS, 1, true);
 
-export { pristine };
+const validateForm = () => {
+  pristine.validate();
+};
+
+const resetForm = () => {
+  pristine.reset();
+};
+
+export {validateForm, resetForm};

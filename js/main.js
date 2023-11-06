@@ -1,5 +1,6 @@
 import { buildPostsData } from './data.js';
 import { renderGallery } from './gallery/gallery.js';
-import './uploadForm/popup.js';
+import { renderUpload } from './upload/upload.js';
 
 renderGallery(buildPostsData(19));
+renderUpload();
