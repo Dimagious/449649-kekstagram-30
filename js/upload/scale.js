@@ -1,30 +1,25 @@
-const SCALE_STEP = 0.25;
-const SCALE_MAX_VALUE = 1;
-const SCALE_MIN_VALUE = 0.25;
+const SCALE_STEP = 25;
+const SCALE_MAX_VALUE = 100;
+const SCALE_MIN_VALUE = 25;
+const DEFAULT_VALUE = 100;
 
-const defaultImg = document.querySelector('.img-upload__preview img');
-const scaleValueInput = document.querySelector('.scale__control--value');
+const scaleDownButton = document.querySelector('.scale__control--smaller');
+const display = document.querySelector('.scale__control--value');
+const scaleUpButton = document.querySelector('.scale__control--bigger');
 
-let scaleValue = 1;
-
-const updateImageScale = (scaleFactor = 1) => {
-  scaleValue += SCALE_STEP * scaleFactor;
-  if (scaleValue < SCALE_MIN_VALUE) {
-    scaleValue = SCALE_MIN_VALUE;
-  } else if (scaleValue > SCALE_MAX_VALUE) {
-    scaleValue = SCALE_MAX_VALUE;
-  }
-
-  scaleValueInput.value = `${scaleValue * 100}%`;
-  defaultImg.style.transform = `scale(${scaleValue})`;
+const setScale = (value) => {
+  value = Math.max(value, SCALE_MIN_VALUE);
+  value = Math.min(value, SCALE_MAX_VALUE);
+  display.value = `${value}%`;
+  display.dispatchEvent(new Event('change', {bubbles: true}));
 };
 
-const onMinusButtonClick = () => {
-  updateImageScale(-1);
-};
+const getScale = () => Number.parseFloat(display.value);
+const resetScale = () => setScale(DEFAULT_VALUE);
+const scaleDown = () => setScale(getScale() - SCALE_STEP);
+const scaleUp = () => setScale(getScale() + SCALE_STEP);
 
-const onPlusButtonClick = () => {
-  updateImageScale();
-};
+scaleDownButton.addEventListener('click', () => scaleDown());
+scaleUpButton.addEventListener('click', () => scaleUp());
 
-export {onMinusButtonClick, onPlusButtonClick};
+export {getScale, resetScale};
