@@ -32,12 +32,7 @@ pristine.addValidator(hashtagInput, isValidHashtagLength, ERROR_TOO_MANY_HASHTAG
 pristine.addValidator(hashtagInput, hasNoDuplicates, ERROR_DUPLICATE_HASHTAGS, 3, true);
 pristine.addValidator(commentInput, validateComment, ERROR_TOO_MANY_SYMBOLS);
 
-const validateForm = () => {
-  pristine.validate();
-};
+const checkValidity = () => pristine.validate();
+const resetValidity = () => pristine.reset();
 
-const resetForm = () => {
-  pristine.reset();
-};
-
-export {validateForm, resetForm};
+export {checkValidity, resetValidity};
