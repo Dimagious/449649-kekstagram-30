@@ -1,4 +1,4 @@
-import {validateForm, resetForm} from './validation.js';
+import {checkValidity, resetValidity} from './validation.js';
 import {openPopup} from './popup.js';
 import {getScale, resetScale} from './scale.js';
 import {setEffect, getEffectValue, resetEffect} from './effects.js';
@@ -25,7 +25,7 @@ const renderUpload = () => {
   });
 
   form.addEventListener('submit', (event) => {
-    if (!validateForm()) {
+    if (!checkValidity()) {
       event.preventDefault();
     }
   });
@@ -33,7 +33,7 @@ const renderUpload = () => {
   form.addEventListener('reset', () => {
     resetScale();
     resetEffect();
-    resetForm();
+    resetValidity();
   });
 };
 
