@@ -24,4 +24,4 @@ const openPopup = () => {
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-export {openPopup};
+export {openPopup, closePopup};
