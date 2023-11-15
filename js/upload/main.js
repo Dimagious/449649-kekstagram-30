@@ -17,36 +17,34 @@ const resetForm = () => {
   closePopup();
 };
 
-const renderUpload = () => {
-  form.addEventListener('change', (event) => {
-    switch (event.target.name) {
-      case 'filename':
-        openPopup();
-        break;
-      case 'scale':
-        preview.style.transform = `scale(${getScale() / 100})`;
-        break;
-      case 'effect-level':
-        preview.style.filter = getEffectValue();
-        break;
-      case 'effect':
-        setEffect(event.target.value);
-        break;
-    }
-  });
+form.addEventListener('change', (event) => {
+  switch (event.target.name) {
+    case 'filename':
+      openPopup();
+      break;
+    case 'scale':
+      preview.style.transform = `scale(${getScale() / 100})`;
+      break;
+    case 'effect-level':
+      preview.style.filter = getEffectValue();
+      break;
+    case 'effect':
+      setEffect(event.target.value);
+      break;
+  }
+});
 
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    if (checkValidity()) {
-      new FormData(form);
-    }
-  });
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  if (checkValidity()) {
+    new FormData(form);
+  }
+});
 
-  form.addEventListener('reset', () => {
-    resetScale();
-    resetEffect();
-    resetValidity();
-  });
-};
+form.addEventListener('reset', () => {
+  resetScale();
+  resetEffect();
+  resetValidity();
+});
 
-export {renderUpload, setSubmitDisabled, resetForm};
+export {setSubmitDisabled, resetForm};
