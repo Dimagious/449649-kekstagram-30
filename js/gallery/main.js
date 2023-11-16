@@ -7,11 +7,11 @@ const DEFAULT_FILTER = 'filter-default';
 const RANDOM_FILTER = 'filter-random';
 const DISCUSSED_FILTER = 'filter-discussed';
 
-const renderGallery = (picturesData) => {
+const renderGallery = (picturesData, reduceFrequency) => {
   renderFilters();
   renderThumbnails(picturesData);
 
-  document.addEventListener('filterSelect', (event) => {
+  document.addEventListener('filterSelect', reduceFrequency((event) => {
     switch (event.detail) {
       case DEFAULT_FILTER:
         renderThumbnails(picturesData);
@@ -23,7 +23,7 @@ const renderGallery = (picturesData) => {
         renderThumbnails(applyDiscussedFilter(picturesData));
         break;
     }
-  });
+  }));
 
   document.addEventListener('thumbnailSelect', (event) => {
     renderPopupDetails(event.detail);
