@@ -1,3 +1,11 @@
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+  return (...rest) => {
+    window.clearTimeout(timeoutId);
+    timeoutId = window.setTimeout(() => callback(...rest), timeoutDelay);
+  };
+};
+
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const request = async (url, options) => {
@@ -9,4 +17,4 @@ const request = async (url, options) => {
   return response.json();
 };
 
-export {request, isEscapeKey};
+export {debounce, isEscapeKey, request};
