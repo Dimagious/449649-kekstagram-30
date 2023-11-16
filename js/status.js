@@ -1,9 +1,11 @@
+import {isEscapeKey} from './utilities';
+
 const renderStatus = (type, options = {}) => {
   const template = document.querySelector(`#${type}`);
   const status = template.content.querySelector(`.${type}`).cloneNode(true);
 
   const onDocumentKeydown = (event) => {
-    if (event.key.startsWith('Esc')) {
+    if (isEscapeKey(event)) {
       status.click();
       event.stopPropagation();
     }
