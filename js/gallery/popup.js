@@ -4,9 +4,9 @@ import {renderComments} from './comments.js';
 const bigPicture = document.querySelector('.big-picture');
 const closeButton = document.querySelector('.big-picture__cancel');
 
-const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
+const onDocumentKeydown = (event) => {
+  if (isEscapeKey(event)) {
+    event.preventDefault();
     closeButton.click();
   }
 };
